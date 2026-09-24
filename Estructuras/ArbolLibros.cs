@@ -184,4 +184,129 @@ public class ArbolLibros
 
             MostrarEnOrdenRecursivo(nodo.Derecha);
         }
+
+        //Libro con el ISBN más pequeño (el primer libro en orden ascendente)
+        public Libro? ObtenerMenorISBN()
+        {
+            if (raiz == null)
+            {
+            return null;
+            }
+
+            NodoLibros actual = raiz;
+
+            while (actual.Izquierda != null)
+            {
+                actual = actual.Izquierda;
+            }
+
+        return actual.Libro;
+    }
+
+    //Libro con el ISBN más grande (el último libro en orden ascendente)
+    public Libro? ObtenerMayorISBN()
+    {
+        if (raiz == null)
+        {
+            return null;
+        }
+
+        NodoLibros actual = raiz;
+
+        while (actual.Derecha != null)
+        {
+            actual = actual.Derecha;
+        }
+
+        return actual.Libro;
+    }
+
+    //Eliminar un libro por búsqueda de ISBN
+    public bool Eliminar(int isbn)
+    {
+        if (Buscar(isbn) == null)
+        {
+            return false;
+        }
+
+        raiz = EliminarRecursivo(raiz, isbn);
+
+        return true;
+    }
+
+    private NodoLibros? EliminarRecursivo(NodoLibros? nodo, int isbn){
+        if (nodo == null)
+        {
+            return null;
+        }
+
+        if (isbn < nodo.Libro.ISBN)
+        {
+            nodo.Izquierda =
+                EliminarRecursivo(nodo.Izquierda, isbn);
+        }
+        else if (isbn > nodo.Libro.ISBN)
+        {
+            nodo.Derecha = EliminarRecursivo(nodo.Derecha, isbn);
+        }
+        else
+        {
+            if (nodo.Izquierda == null)
+            {
+                return nodo.Derecha;
+            }
+
+            if (nodo.Derecha == null)
+            { 
+                return nodo.Izquierda;
+            }
+
+            NodoLibros sucesor = ObtenerNodoMenor(nodo.Derecha); //Método para reemplazar elemento eliminado con el el más pequeño de su rama
+
+            nodo.Libro = sucesor.Libro;
+
+            nodo.Derecha = EliminarRecursivo(nodo.Derecha, sucesor.Libro.ISBN);
+        }
+
+        nodo.Altura = 1 + Mayor(ObtenerAltura(nodo.Izquierda), ObtenerAltura(nodo.Derecha));
+
+        int balance = ObtenerBalance(nodo);
+
+        if (balance > 1 && ObtenerBalance(nodo.Izquierda) >= 0)
+        {
+            return RotacionDerecha(nodo);
+        }
+
+        if (balance > 1 && ObtenerBalance(nodo.Izquierda) < 0)
+        {
+            nodo.Izquierda = RotacionIzquierda(nodo.Izquierda!);
+
+        return RotacionDerecha(nodo);
+        }
+
+        if (balance < -1 && ObtenerBalance(nodo.Derecha) <= 0)
+        {
+            return RotacionIzquierda(nodo);
+        }
+
+        if (balance < -1 && ObtenerBalance(nodo.Derecha) > 0){
+        nodo.Derecha = RotacionDerecha(nodo.Derecha!);
+
+            return RotacionIzquierda(nodo);
+        }
+
+        return nodo;
+    }
+
+    private NodoLibros ObtenerNodoMenor(NodoLibros nodo)
+    {
+        NodoLibros actual = nodo;
+
+        while (actual.Izquierda != null)
+        {
+            actual = actual.Izquierda;
+        }
+
+        return actual;
+    }
 }

@@ -7,10 +7,14 @@ public class NodoCategoria
     public NodoCategoria? Hijo { get; set; }
     public NodoCategoria? Hoja { get; set; }
 
+    public ArbolLibros LibrosCategoria { get; set; }
+
     public NodoCategoria(Categoria categoria)
     {
         Categoria = categoria;
         Hijo = null;
         Hoja = null;
+
+        LibrosCategoria = new ArbolLibros();
     }
 }
