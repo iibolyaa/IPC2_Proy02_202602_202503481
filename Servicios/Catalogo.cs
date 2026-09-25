@@ -15,6 +15,26 @@ public class Catalogo
 
     public bool RegistrarLibro(int isbn, string titulo, string autor, string categoria)
     {
+        if (isbn <= 0)
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(titulo))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(autor))
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(categoria))
+        {
+            return false;
+        }
+        
         if(ArbolLibros.Buscar(isbn) != null)
         {
             return false;
@@ -105,4 +125,6 @@ public class Catalogo
 
         return true;
     }
+
+    
 }

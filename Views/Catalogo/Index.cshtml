@@ -1,0 +1,235 @@
+@{
+    ViewData["Title"] = "Gestión del Catálogo";
+}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">
+        Gestión del Catálogo
+    </h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <hr />
+
+    <h3>Agregar categoría</h3>
+
+    <form asp-controller="Catalogo"
+          asp-action="AgregarCategoria"
+          method="post">
+
+        <div class="mb-3">
+
+            <label>
+                Nombre de la categoría
+            </label>
+
+            <input type="text"
+                   name="nombre"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary">
+
+            Agregar categoría
+
+        </button>
+
+    </form>
+
+    <hr />
+
+    <h3>Agregar subcategoría</h3>
+
+    <form asp-controller="Catalogo"
+          asp-action="AgregarSubcategoria"
+          method="post">
+
+        <div class="mb-3">
+
+            <label>
+                Categoría padre
+            </label>
+
+            <input type="text"
+                   name="padre"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>
+                Nueva subcategoría
+            </label>
+
+            <input type="text"
+                   name="nombre"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary">
+
+            Agregar subcategoría
+
+        </button>
+
+    </form>
+
+    <hr />
+
+    <h3>Registrar libro</h3>
+
+    <form asp-controller="Catalogo"
+          asp-action="RegistrarLibro"
+          method="post">
+
+        <div class="mb-3">
+
+            <label>ISBN</label>
+
+            <input type="number"
+                   name="isbn"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Título</label>
+
+            <input type="text"
+                   name="titulo"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Autor</label>
+
+            <input type="text"
+                   name="autor"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Categoría</label>
+
+            <input type="text"
+                   name="categoria"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Registrar libro
+
+        </button>
+
+    </form>
+
+    <hr />
+
+    <h3>Buscar libro</h3>
+
+    <form asp-controller="Catalogo"
+          asp-action="BuscarLibro"
+          method="post">
+
+        <div class="mb-3">
+
+            <label>ISBN</label>
+
+            <input type="number"
+                   name="isbn"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-info">
+
+            Buscar libro
+
+        </button>
+
+    </form>
+
+    <hr />
+
+    <h3>Eliminar libro</h3>
+
+    <form asp-controller="Catalogo"
+          asp-action="EliminarLibro"
+          method="post">
+
+        <div class="mb-3">
+
+            <label>ISBN</label>
+
+            <input type="number"
+                   name="isbn"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-danger">
+
+            Eliminar libro
+
+        </button>
+
+    </form>
+
+    <hr />
+
+    <h3>Consultas</h3>
+
+    <a asp-controller="Catalogo"
+       asp-action="Menor"
+       class="btn btn-secondary">
+
+        Libro con menor ISBN
+
+    </a>
+
+    <a asp-controller="Catalogo"
+       asp-action="Mayor"
+       class="btn btn-secondary">
+
+        Libro con mayor ISBN
+
+    </a>
+
+</div> 
