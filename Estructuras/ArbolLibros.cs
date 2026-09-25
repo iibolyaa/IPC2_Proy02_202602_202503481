@@ -11,6 +11,11 @@ public class ArbolLibros
             raiz = null;
         }
 
+        public NodoLibros? ObtenerRaiz()
+        {
+            return raiz;
+        }
+
         private int ObtenerAltura(NodoLibros? nodo)
         {
             if (nodo == null)

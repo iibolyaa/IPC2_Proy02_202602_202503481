@@ -10,6 +10,11 @@ public class ArbolCategorias
         raiz = null;
     }
 
+    public NodoCategoria? ObtenerRaiz()
+    {
+        return raiz;
+    }
+
     public NodoCategoria? BuscarCategoria(string nombre)
     {
         return BuscarRecursivo(raiz, nombre);
@@ -39,6 +44,11 @@ public class ArbolCategorias
 
     public bool AgregarCategoriaPrincipal(string nombre)
     {
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            return false;
+        }
+
         if (BuscarCategoria(nombre) != null)
         {
             return false;
@@ -75,6 +85,11 @@ public class ArbolCategorias
     }
 
     public bool AgregarSubcategoria(string nombrePadre, string nombreNuevaCategoria){
+        if (string.IsNullOrWhiteSpace(nombrePadre) || string.IsNullOrWhiteSpace(nombreNuevaCategoria))
+        {
+            return false;
+        }
+        
         if (BuscarCategoria(nombreNuevaCategoria) != null)
         {
             return false;
@@ -122,4 +137,6 @@ public class ArbolCategorias
 
         MostrarRecursivo(actual.Hoja, nivel);
     }
+
+    
 }

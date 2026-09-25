@@ -1,0 +1,64 @@
+@using IPC2_Proy02_202602_202503481.Datos
+
+@{
+    ViewData["Title"] = "Resultado";
+
+    Libro? libro =
+        ViewBag.Libro as Libro;
+}
+
+<div class="container mt-4">
+
+    <h1>
+        Datos del libro
+    </h1>
+
+    @if (libro == null)
+    {
+        <div class="alert alert-warning">
+
+            No hay libros registrados.
+
+        </div>
+    }
+    else
+    {
+        <div class="card">
+
+            <div class="card-body">
+
+                <h4 class="card-title">
+                    @libro.Titulo
+                </h4>
+
+                <p>
+                    <strong>ISBN:</strong>
+                    @libro.ISBN
+                </p>
+
+                <p>
+                    <strong>Autor:</strong>
+                    @libro.Autor
+                </p>
+
+                <p>
+                    <strong>Categoría:</strong>
+                    @libro.Categoria
+                </p>
+
+            </div>
+
+        </div>
+    }
+
+    <br />
+
+    <a asp-controller="Catalogo"
+       asp-action="Index"
+       class="btn btn-primary">
+
+        Regresar
+
+    </a>
+
+</div>
